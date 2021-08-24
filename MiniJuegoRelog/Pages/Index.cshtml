@@ -1,0 +1,44 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+
+}
+
+<div class="container">
+    <div class="row">
+        <div>
+            <h1 class="main text-center">STOP WATCH</h1>
+        </div>
+        <div>
+            <p><button class="btn btn-primary" id="load">Load</button></p>
+            <a onclick="jQueryModalGet('?handler=CreateOrEdit','Create Employee')" class="btn bg-success">
+                Create
+            </a>
+            <form method="POST">
+                <input id="output2" type="hidden" asp-for="Tiempo" />
+                <button type="submit" class="btn btn-primary">Enviar Tiempo</button>
+            </form>
+            <p id="output" class="text-center"></p>
+            <div id="controls" class="text-center">
+                <button class="btn btn-default" id="startPause" onclick="startPause()">START</button>
+                <button class="btn btn-default" onclick="reset()">RESET</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="@Url.Content("~/Styles/main.css")" rel="stylesheet" type="text/css" />
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#load').click(function () {
+                alert('abc');
+            })
+        })
+    </script>
+}
