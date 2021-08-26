@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MiniJuegoRelog.Data;
 using MiniJuegoRelog.Data.Repositoriys;
+using MiniJuegoRelog.Data.Repositorys;
 using MiniJuegoRelog.Interfaces;
 using MiniJuegoRelog.Services;
 using System;
@@ -33,6 +34,7 @@ namespace MiniJuegoRelog
             #region Repositories
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             services.AddTransient<IParticipanteRepositoryAsync, ParticipanteRepositoryAsync>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddHttpContextAccessor();
             services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IRazorRenderService, RazorRenderService>();

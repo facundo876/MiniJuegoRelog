@@ -22,6 +22,54 @@
         }
 
     }
+    jQueryModalPost = form => {
+        try {
+            $.ajax({
+                type: 'POST',
+                url: form.action,
+                data: new FormData(form),
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    if (res.isValid) {
+                        $('#viewAll').html(res.html)
+                        $('#form-modal').modal('hide');
+                    }
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+            return false;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
+    jQueryModalDelete = form => {
+        if (confirm('Are you sure to delete this record ?')) {
+            try {
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: new FormData(form),
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        $('#viewAll').html(res.html);
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+            } catch (ex) {
+                console.log(ex)
+            }
+        }
+
+        //prevent default form submit event
+        return false;
+    }
 })
 
 var time = 0;
@@ -59,8 +107,7 @@ function increment() {
                 secs = "0" + secs;
             }
             document.getElementById("output").innerHTML = mins + ":" + secs + ":" + "0" + tenths;
-            document.getElementById("output2").value = mins + ":" + secs + ":" + "0" + tenths;
             increment();
-        }, 100);
+        }, 10);
     }
 }

@@ -11,14 +11,15 @@
             <h1 class="main text-center">STOP WATCH</h1>
         </div>
         <div>
-            <p><button class="btn btn-primary" id="load">Load</button></p>
-            <a onclick="jQueryModalGet('?handler=CreateOrEdit','Create Employee')" class="btn bg-success">
-                Create
-            </a>
-            <form method="POST">
-                <input id="output2" type="hidden" asp-for="Tiempo" />
-                <button type="submit" class="btn btn-primary">Enviar Tiempo</button>
-            </form>
+            <div class="chronometer">
+                <div id="screen">00 : 00 : 00 : 00</div>
+                <div class="buttons">
+                    <button id="btnStart" onclick="start()">START &#9658;</button>
+                    <button  onclick="reset()">RESET &#8635;</button>
+                </div>
+            </div>
+        </div>
+        <div>
             <p id="output" class="text-center"></p>
             <div id="controls" class="text-center">
                 <button class="btn btn-default" id="startPause" onclick="startPause()">START</button>
@@ -34,11 +35,5 @@
 
 @section Scripts
 {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#load').click(function () {
-                alert('abc');
-            })
-        })
-    </script>
+
 }

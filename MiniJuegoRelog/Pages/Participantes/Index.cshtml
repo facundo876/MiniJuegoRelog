@@ -10,45 +10,25 @@
             <h2 class="text-info">Lista de Participantes</h2>
         </div>
         <div class="col-3">
-            <a class="btn btn-secondary" onclick="jQueryModalGet('?handler=CreateOrEdit','Crear Participante')">Crear Nuevo</a>
+            <a class="btn btn-primary" onclick="jQueryModalGet('?handler=CreateOrEdit','Crear Participante')">Crear Nuevo</a>
         </div>
     </div>
     <br />
     <br />
-    @if (Model.Participantes.Count() > 0)
-    {
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th>@Html.DisplayNameFor(m => m.Participantes.FirstOrDefault().Id)</th>
-                    <th>@Html.DisplayNameFor(m => m.Participantes.FirstOrDefault().Name)</th>
-                    <th>@Html.DisplayNameFor(m => m.Participantes.FirstOrDefault().Email)</th>
-                    <th>@Html.DisplayNameFor(m => m.Participantes.FirstOrDefault().FechaCreacion)</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var participante in Model.Participantes)
-                {
-                <tr>
-                    <td>@Html.DisplayFor(m => participante.Id)</td>
-                    <td>@Html.DisplayFor(m => participante.Name)</td>
-                    <td>@Html.DisplayFor(m => participante.Email)</td>
-                    <td>@Html.DisplayFor(m => participante.FechaCreacion)</td>
-                    <td>
-                        <a class="btn btn-success" asp-page="/Categorias/Detalle" asp-route-id="@participante.Id">Detalle</a>
-                        <a class="btn btn-warning" asp-page="/Categorias/Editar" asp-route-id="@participante.Id">Editar</a>
-                        <a class="btn btn-danger" asp-page="/Categorias/Borrar" asp-route-id="@participante.Id">Borrar</a>
-                    </td>
-                </tr>
-                }
-
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p>No hay Participantes.</p>
-    }
+    <div class="card">
+        <div id="viewAll" class="card-body table-responsive"></div>
+    </div>  
 </div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+                $('#viewAll').load('?handler=ViewAllPartial');
+            });
+            $(function () {
+                $('#reload').on('click', function () {
+                    $('#viewAll').load('?handler=ViewAllPartial');
+                });
+            });
+    </script>
+}

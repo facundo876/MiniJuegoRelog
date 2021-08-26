@@ -2,23 +2,25 @@
 @model Participante
 <form id="create-form" method="post" asp-page="Index" asp-route-id="@Model.Id" asp-page-handler="CreateOrEdit" onsubmit="return jQueryModalPost(this);">
     <div class="form-group row">
-        <label class="col-md-3 col-form-label">First Name</label>
+        <label class="col-md-3 col-form-label">Name</label>
         <div class="col-md-9">
-            <input type="text" autocomplete="off" asp-for="Name" name="FirstName" class="form-control">
+            <input type="text" autocomplete="off" asp-for="Name" name="Name" class="form-control">
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
+    <br />
     <div class="form-group row">
-        <label class="col-md-3 col-form-label">Last Name</label>
+        <label class="col-md-3 col-form-label">Email</label>
         <div class="col-md-9">
-            <input type="text" autocomplete="off" asp-for="Email" name="LastName" class="form-control">
+            <input type="text" autocomplete="off" asp-for="Email" name="Email" class="form-control">
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
     </div>
+    <br />
     <div class="form-group row">
-        <label class="col-md-3 col-form-label">Mobile</label>
+        <label class="col-md-3 col-form-label">Fecha de Creacion</label>
         <div class="col-md-9">
-            <input type="number" autocomplete="off" asp-for="FechaCreacion" name="Mobile" class="form-control" />
+            <input autocomplete="off" asp-for="FechaCreacion" name="FechaCreacion" class="form-control" />
             <span asp-validation-for="FechaCreacion" class="text-danger"></span>
         </div>
     </div>
