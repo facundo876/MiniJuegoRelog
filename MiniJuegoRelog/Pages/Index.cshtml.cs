@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MiniJuegoRelog.Data;
+using MiniJuegoRelog.Interfaces;
+using MiniJuegoRelog.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,35 +17,40 @@ namespace MiniJuegoRelog.Pages
 {
     public class IndexModel : PageModel
     {
+        private readonly ITiemposRepositoryAsync _tiempo;
+        private readonly IParticipanteRepositoryAsync _participante;
         private readonly ILogger<IndexModel> _logger;
 
-        [BindProperty]
-        public string Tiempo { get; set; }
+        public IEnumerable<Tiempos> Tiempos { get; set; }
+        public IEnumerable<Participante> Participantes { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, ITiemposRepositoryAsync tiempo, IParticipanteRepositoryAsync participante)
         {
-            _logger = logger;
+            this._logger = logger;
+            this._tiempo = tiempo;
+            this._participante = participante;
         }
 
         public void OnGet()
         {
         }
-        public async Task<JsonResult> OnGetCreateOrEditAsync(int id = 0)
+
+        public async Task<PartialViewResult> OnGetViewAll2Partial()
         {
-            return new JsonResult(new { isValid = true, html = "" });
+            this.Tiempos = await this._tiempo.GetAllAsync();
+            this.Participantes = await this._participante.GetAllAsync();
+
+            foreach (Tiempos tiempo in this.Tiempos)
+            {
+                tiempo.Participante = this.Participantes.Single(p => p.Id == tiempo.ParticipanteId);
+            }
+
+            return new PartialViewResult
+            {
+                ViewName = "_ViewAll2",
+                ViewData = new ViewDataDictionary<IEnumerable<Tiempos>>(ViewData, this.Tiempos)
+            };
         }
 
-        public async Task<IActionResult> OnPost()
-        {
-            if (ModelState.IsValid)
-            {
-                this.Tiempo = this.Tiempo;
-                return Page();
-            }
-            else
-            {
-                return Page();
-            }
-        }
     }
 }

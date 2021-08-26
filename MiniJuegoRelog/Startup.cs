@@ -34,6 +34,7 @@ namespace MiniJuegoRelog
             #region Repositories
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             services.AddTransient<IParticipanteRepositoryAsync, ParticipanteRepositoryAsync>();
+            services.AddTransient<ITiemposRepositoryAsync, TiemposRepositoryAsync>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddHttpContextAccessor();
             services.AddTransient<IActionContextAccessor, ActionContextAccessor>();

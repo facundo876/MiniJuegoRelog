@@ -36,6 +36,7 @@ namespace MiniJuegoRelog.Pages.Participantes
         public async Task<PartialViewResult> OnGetViewAllPartial()
         {
             this.Participantes = await this._participante.GetAllAsync();
+            
             return new PartialViewResult
             {
                 ViewName = "_ViewAll",

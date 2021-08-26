@@ -15,7 +15,7 @@
                 <div id="screen">00 : 00 : 00 : 00</div>
                 <div class="buttons">
                     <button id="btnStart" onclick="start()">START &#9658;</button>
-                    <button  onclick="reset()">RESET &#8635;</button>
+                    <button onclick="reset()">RESET &#8635;</button>
                 </div>
             </div>
         </div>
@@ -26,6 +26,9 @@
                 <button class="btn btn-default" onclick="reset()">RESET</button>
             </div>
         </div>
+        <div class="card">
+            <div id="viewAll2" class="card-body table-responsive"></div>
+        </div>
     </div>
 </div>
 
@@ -35,5 +38,10 @@
 
 @section Scripts
 {
+    <script>
+        $(document).ready(function () {
+            $('#viewAll2').load('?handler=ViewAll2Partial');
+        });
+    </script>
 
 }

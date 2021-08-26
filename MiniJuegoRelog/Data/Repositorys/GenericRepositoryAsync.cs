@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniJuegoRelog.Interfaces;
+using MiniJuegoRelog.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
